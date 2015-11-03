@@ -1,0 +1,72 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+
+<dom-module id="my-tagcloud-environment">
+  <template>
+    <style>
+      :host {
+        width: 46vw;
+        height: 23vw;
+        border:5px solid black;
+        position: relative;
+        background-color: #2d2d2d;
+        padding:2vw;
+        color:white;<!-- IMPORTANT: does not apply to imported templates-->
+      }
+      #mf{
+        margin-top:2vw;
+        margin-left: 2vw;
+      }
+      #mf /deep/ div{
+        border-color:#9f9f9f;<!-- IMPORTANT: we need to go... /deep/er-->
+      }
+      #mf div{
+        border-color:red;<!-- IMPORTANT: does not make border red because it's not accesible-->
+      }
+      #tc{
+        background-color: #e5e5e5;
+      }
+      #tc /deep/ span{
+        color:#6a6a6a;
+      }
+      #tc /deep/ span:hover{
+        color:#2b2b2b;
+      }
+
+    </style>
+    <div class="layout horizontal wrap">
+      <div class="flex">
+        <my-frame id = "mf">
+          <my-editable-tagcloud id = "tc" result = "{{selectedTag}}"></my-editable-tagcloud>
+        </my-frame>
+      </div>
+      <div class = "flex layout vertical wrap">
+        <div class="flex">
+          <my-element-adder options='[{"name":"big"},{"name":"normal"},{"name":"minor"}]'
+                            input-label="Enter a text:"
+                            selection-label="Choose a size:"
+                            button-text="Add word"
+                            on-element-result-changed = "addElementToTagcloud">
+          </my-element-adder>
+        </div>
+        <div class="flex">
+          <my-result-shower label="You've searched for" result = {{selectedTag}}></my-result-shower>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+
+      Polymer({
+        is: 'my-tagcloud-environment',
+
+        addElementToTagcloud: function(e){
+          var newElement = e.detail.value;
+          this.$.tc.addWord(newElement.text, newElement.option);
+        }
+      })
+    })();
+  </script>
+  </dom-module>

@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+
+<dom-module id="my-result-shower">
+  <template>
+    <style>
+    </style>
+
+    <div class="horizontal layout">
+      <span>{{label}}</span>
+      <span>: </span>
+      <span style="font-weight:bold;margin-left: 10px;">{{result}}</span>
+
+    </div>
+  </template>
+
+  <script>
+    (function() {
+
+      Polymer({
+        is: 'my-result-shower',
+        properties: {
+          result: {
+            type: String
+          },
+          label: {
+            type: String
+          }
+        }
+      })
+    })();
+  </script>
+</dom-module>

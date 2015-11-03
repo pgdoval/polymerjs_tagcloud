@@ -1,0 +1,26 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="my-frame">
+  <template>
+    <style>
+      div {
+        width: 20vw;
+        height: 20vw;
+        border:5px solid #132da2;
+        position: relative;
+      }
+    </style>
+    <div>
+    <content></content>
+    </div>
+  </template>
+
+  <script>
+    (function() {
+
+      Polymer({
+        is: 'my-frame'
+      })
+    })();
+  </script>
+  </dom-module>

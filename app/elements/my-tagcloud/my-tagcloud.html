@@ -1,0 +1,91 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+
+<dom-module id="my-tagcloud">
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        position:relative;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(218, 255, 252);
+      }
+      span{
+        position:absolute;
+        float:left;
+        color: #3ea2ff;
+      }
+
+      span:hover{
+         color: #132da2;
+      }
+
+      .big-word {
+        font-size: 2vw;
+        font-weight: bold;
+      }
+      .normal-word {
+        font-size: 1.5vw;
+      }
+      .minor-word {
+        font-size: 1vw;
+      }
+    </style>
+
+    <template is="dom-repeat" id="menu" items="{{elements}}" as = "element">
+        <span class$="{{element.size}}" style$="[[getPositionForElement(index)]]">{{element.text}}</span>
+    </template>
+
+  </template>
+
+  <script>
+    (function() {
+      'use strict';
+
+      Polymer({
+        is: 'my-tagcloud',
+
+        ready: function(){
+          this.elements = [
+            {size:'normal-word', text:'Codemotion'},
+            {size:'minor-word', text:'Organization'},
+            {size:'normal-word', text:'Modularity'},
+            {size:'big-word', text:'Dart'},
+            {size:'big-word', text:'Polymer'},
+            {size:'normal-word', text:'Clean code'},
+            {size:'minor-word', text:'Javascript'},
+            {size:'minor-word', text:'Separation of concerns'},
+            {size:'minor-word', text:'Single responsability'},
+            {size:'minor-word', text:'Component orientation'}
+          ];
+
+          this.positions = [
+            {x:'8%', y:'80%'},
+            {x:'17%', y:'60%'},
+            {x:'15%', y:'40%'},
+            {x:'5%', y:'8%'},
+            {x:'55%', y:'20%'},
+            {x:'10%', y:'25%'},
+            {x:'65%', y:'85%'},
+            {x:'60%', y:'34%'},
+            {x:'50%', y:'10%'},
+            {x:'32%', y:'53%'},
+            {x:'25%', y:'66%'}
+          ]
+        },
+
+        getPositionForElement: function(order){
+          var position = this.positions[order];
+          if(position==undefined)
+          {
+            return "display:none;";
+          }
+          return "margin-top:"+position.y+";margin-left:"+position.x+";";
+        }
+
+      });
+    })();
+  </script>
+
+</dom-module>
