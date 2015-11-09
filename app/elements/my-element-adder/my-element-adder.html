@@ -5,56 +5,71 @@
 <link rel="import" href="bower_components/paper-button/paper-button.html">
 
 <dom-module id="my-element-adder">
+  <style>
+    paper-button{
+      background-color: #818181;
+      margin-top: 50px;
+    }
+
+    paper-button:hover{
+      background-color: #4d4d4d;
+      box-shadow: 0 0 10px #ffffff;
+    }
+
+    #text-input{
+      line-height: 2vw;
+      font-size:1vw;
+      max-width:80%;
+    }
+
+    #listSelection > * {
+      padding: 8px;
+    }
+    #listSelection{
+      cursor: pointer;
+      cursor: hand;
+    }
+    .iron-selected {
+      background-color: #2196F3;
+      color: white;
+    }
+  </style>
+
+
+
   <template>
-    <style>
-      paper-button{
-        background-color: #818181;
-        margin-top: 50px;
-      }
-
-      paper-button:hover{
-        background-color: #4d4d4d;
-        box-shadow: 0 0 10px #ffffff;
-      }
-
-      #text-input{
-        line-height: 2vw;
-        font-size:1vw;
-        max-width:80%;
-      }
-
-      #listSelection > * {
-        padding: 8px;
-      }
-      #listSelection{
-        cursor: pointer;
-        cursor: hand;
-      }
-      .iron-selected {
-        background-color: #2196F3;
-        color: white;
-      }
-    </style>
     <div class="horizontal layout wrap">
+
       <div class = "flex vertical">
+
         <div class = "flex">
           <label>{{inputLabel}}</label>
           <input id="text-input" is="iron-input" bind-value="{{myText}}">
         </div>
+
         <div class = "flex">
           <paper-button raised on-click="clickButton">{{buttonText}}</paper-button>
         </div>
+
       </div>
+
       <div class = "flex vertical">
+
         <label>{{selectionLabel}}</label>
+
         <iron-selector selected="0" id="listSelection">
           <template is="dom-repeat" id="menu" items="{{options}}" as = "option">
             <div>{{option.name}}</div>
           </template>
         </iron-selector>
+
       </div>
+
     </div>
+
   </template>
+
+
 
   <script>
     (function() {
@@ -93,4 +108,4 @@
       })
     })();
   </script>
-  </dom-module>
+</dom-module>

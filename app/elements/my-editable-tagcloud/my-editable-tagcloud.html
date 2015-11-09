@@ -1,7 +1,8 @@
 <link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/iron-ajax/iron-ajax.html">
 
 <dom-module id="my-editable-tagcloud">
-  <template>
+
 
     <style>
       :host {
@@ -36,11 +37,25 @@
       }
     </style>
 
+
+
+  <template>
+
+    <iron-ajax
+      auto
+      id ="ajax"
+      url="http://localhost:8080/Backend_dart_polymer/pairs/"
+      handle-as="json"
+      last-response="{{elements}}">
+    </iron-ajax>
+
     <template  is="dom-repeat" id="menu" items="{{elements}}" as = "element">
         <span class$="{{element.size}}" style$="[[getPositionForElement(index)]]" on-click="getClickedWord">{{element.text}}</span>
     </template>
 
   </template>
+
+
 
   <script>
     (function() {
@@ -52,20 +67,8 @@
             type: String,
             notify: true
           },
-          elements: {
-            type: Array,
-            value:[
-              {size:'normal-word', text:'Codemotion'},
-              {size:'minor-word', text:'Organization'},
-              {size:'normal-word', text:'Modularity'},
-              {size:'big-word', text:'Dart'},
-              {size:'big-word', text:'Polymer'},
-              {size:'normal-word', text:'Clean code'},
-              {size:'minor-word', text:'Javascript'},
-              {size:'minor-word', text:'Separation of concerns'},
-              {size:'minor-word', text:'Single responsability'},
-              {size:'minor-word', text:'Component orientation'}
-            ]
+          elements:{
+            type:Array
           },
           positions: {
             type: Array,
@@ -78,11 +81,15 @@
               {x:'10%', y:'25%'},
               {x:'65%', y:'85%'},
               {x:'60%', y:'34%'},
-              {x:'50%', y:'10%'},
+              {x:'50%', y:'8%'},
               {x:'32%', y:'53%'},
               {x:'25%', y:'66%'}
             ]
           }
+        },
+
+        ready: function(){
+          //this.$.ajax.generateRequest()
         },
 
         getPositionForElement: function(order){
